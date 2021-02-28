@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./web:/usr/src/app/
+    ports:
+      - 8000:8000
+    env_file:
+      - .env.dev
+    depends_on:
+      - redis
+  # celery:
+    # build:
+      # context: ./web
+      # dockerfile: Dockerfile
+    # command: celery -A contest worker -l INFO --concurrency=1 -B --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    # volumes:
+      # - ./web:/usr/src/app/
+    # env_file:
+      # - .env.dev
+    # depends_on:
+      # - web
+      # - redis
+  # flower:
+    # image: mher/flower
+    # environment:
+      # - CELERY_BROKER_URL=redis://redis:6379/0
+      # - FLOWER_PORT=8888
+    # ports:
+      # - 8888:8888
+  redis:
+    image: "redis:alpine"
+  # osgeo:
+  #   image: "osgeo/gdal"
