@@ -15,8 +15,11 @@ from geochats.services import (
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        user_location_point = await self.get_current_user_location()
-        self.room_name = await self.get_nearest_chat(user_location_point)
+        # user_location_point = await self.get_current_user_location()
+        # self.room_name = await self.get_nearest_chat(user_location_point)
+        # await self.save_room_id()
+
+        self.room_name = await self.get_room_id()
         self.room_group_name = f'chat_{self.room_name}'
 
         # Join room group
@@ -28,12 +31,20 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         await self.accept()
 
+    # @sync_to_async
+    # def get_current_user_location(self):
+    #     lat = float(self.scope['session']['lat'])
+    #     lng = float(self.scope['session']['lng'])
+    #     point = Point(lng, lat)
+    #     return point
+
+    # @sync_to_async
+    # def save_room_id(self):
+    #     self.scope['session']['room_id'] = self.room_name
+
     @sync_to_async
-    def get_current_user_location(self):
-        lat = float(self.scope['session']['lat'])
-        lng = float(self.scope['session']['lng'])
-        point = Point(lng, lat)
-        return point
+    def get_room_id(self):
+        return self.scope['session']['room_id']
 
     async def disconnect(self, close_code):
         # Leave room group
@@ -71,9 +82,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         chat = PointCenter.objects.get(id=self.room_name)
         Message.objects.create(text=message, chat=chat)
 
-
-    @database_sync_to_async
-    def get_nearest_chat(self, user_location):
-        radius = settings.CHAT_IN_RADIUS
-        chat = get_or_create_chat(radius, user_location)
-        return chat.id
+    # @database_sync_to_async
+    # def get_nearest_chat(self, user_location):
+    #     radius = settings.CHAT_IN_RADIUS
+    #     chat = get_or_create_chat(radius, user_location)
+    #     return chat.id

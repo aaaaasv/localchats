@@ -1,5 +1,6 @@
 Django>=3.0,<4.0
 # gdal
+pyproj
 channels
 asgi_redis
 channels_redis

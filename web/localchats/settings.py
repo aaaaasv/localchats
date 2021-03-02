@@ -24,7 +24,7 @@ SECRET_KEY = '-s##n^(5g939r-8(vfx7f+jh%hv4!=r0@i683d7d8nfjq%(xlh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -132,7 +132,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CHAT_IN_RADIUS = 100  # meters
+CHAT_IN_RADIUS = 37  # meters
+CHAT_SQUARE_SIDE = 20  # meters
 
 ASGI_APPLICATION = 'localchats.asgi.application'
 CHANNEL_LAYERS = {
