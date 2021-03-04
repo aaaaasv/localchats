@@ -1,13 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
-{% for message in messages %}
-<p>{{ message.text }}</p>
-{% endfor %}
-<textarea id="chat-log" cols="100" rows="20"></textarea><br>
-<input id="chat-message-input" type="text" size="100"><br>
-<input id="chat-message-submit" type="button" value="Send">
-{{ room_name|json_script:"room-name" }}
-<script>
+    {% for message in messages %}
+        <p>{{ message.text }}</p>
+    {% endfor %}
+    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+    <input id="chat-message-input" type="text" size="100"><br>
+    <input id="chat-message-submit" type="button" value="Send">
+    {{ room_name|json_script:"room-name" }}
+    <script>
+
+
+        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            {#+ roomName#}
+            {#+ '/'#}
+            + 'room/'
+        );
+
+        chatSocket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            document.querySelector('#chat-log').value += (data.message + '\n');
+        };
+
+        chatSocket.onclose = function (e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#chat-message-input').focus();
+        document.querySelector('#chat-message-input').onkeyup = function (e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function (e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
+            messageInputDom.value = '';
+        };
+
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
@@ -29,49 +67,50 @@
                     'lat': lat,
                     'lng': long
                 },
-                success: function(data) {
-
+                success: function (data) {
+                    if (data.updated) {
+                        chatSocket.close()
+                    }
                 },
 
                 dataType: 'json'
             });
         }
+
         getLocation()
 
-    const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
-    const chatSocket = new WebSocket(
-        'wss://'
-        + window.location.host
-        + '/ws/chat/'
-        {#+ roomName#}
-        {#+ '/'#}
-        + 'room/'
-    );
+        function showLocation(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
 
-    chatSocket.onmessage = function (e) {
-        const data = JSON.parse(e.data);
-        document.querySelector('#chat-log').value += (data.message + '\n');
-    };
-
-    chatSocket.onclose = function (e) {
-        console.error('Chat socket closed unexpectedly');
-    };
-
-    document.querySelector('#chat-message-input').focus();
-    document.querySelector('#chat-message-input').onkeyup = function (e) {
-        if (e.keyCode === 13) {  // enter, return
-            document.querySelector('#chat-message-submit').click();
+            console.log(pos.lng)
+            console.log(pos.lat)
+            alert("Latitude : " + pos.lat + " Longitude: " + pos.lng);
         }
-    };
 
-    document.querySelector('#chat-message-submit').onclick = function (e) {
-        const messageInputDom = document.querySelector('#chat-message-input');
-        const message = messageInputDom.value;
-        chatSocket.send(JSON.stringify({
-            'message': message
-        }));
-        messageInputDom.value = '';
-    };
-</script>
+        function errorHandler(err) {
+            if (err.code === 1) {
+                alert("Error: Access is denied!");
+            } else if (err.code === 2) {
+                alert("Error: Position is unavailable!");
+            }
+        }
+
+        function getLocationUpdate() {
+            if (navigator.geolocation) {
+                // timeout at 60000 milliseconds (60 seconds)
+                var options = {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                };
+                var geoLoc = navigator.geolocation;
+                geoLoc.watchPosition(showLocation, errorHandler, options);
+            }
+        }
+    {#getLocationUpdate()#}
+    </script>
 {% endblock content %}

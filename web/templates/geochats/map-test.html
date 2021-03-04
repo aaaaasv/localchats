@@ -37,7 +37,7 @@
             features: [
                 {% for point in points %}
                     new ol.Feature({
-                        geometry: new ol.geom.Point(ol.proj.fromLonLat({{point}}))
+                        geometry: new ol.geom.Point(ol.proj.fromLonLat({{ point }}))
                     }),
                 {% endfor %}
             ]

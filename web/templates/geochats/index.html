@@ -6,6 +6,7 @@
         <input id="room-name-submit" type="submit" value="Start">
     </form>
     <script>
+            getLocation()
 
         function getLocation() {
             if (navigator.geolocation) {
@@ -36,6 +37,5 @@
             });
         }
 
-        getLocation()
     </script>
 {% endblock content %}
