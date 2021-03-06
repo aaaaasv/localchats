@@ -1,12 +1,10 @@
 from django.contrib import admin
 from .models import (
-    Elevation,
-    Zipcode,
-    PointCenter,
-    Message
+    Chat,
+    Message,
+    AnonymousUser
 )
 
-admin.site.register(Elevation)
-admin.site.register(Zipcode)
-admin.site.register(PointCenter)
+admin.site.register(Chat)
 admin.site.register(Message)
+admin.site.register(AnonymousUser)

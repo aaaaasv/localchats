@@ -1,0 +1,126 @@
+
+::-webkit-scrollbar {
+    width: 10px;
+
+}
+
+::-webkit-scrollbar-track {
+    background: lightgrey;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: gray;
+}
+
+.navbar {
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    z-index: 101;
+}
+
+
+.nav {
+    height: 170px;
+    background-color: black;
+}
+
+.messages {
+    height: 100%;
+    margin-top: 170px;
+    display: flex;
+    overflow-y: auto;
+
+}
+
+.message-input {
+    background-color: white;
+    z-index: 100;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-width: 1px 1px 0 1px;
+    border-color: black;
+    border-style: solid;
+    position: fixed;
+    bottom: 0;
+    height: 100px;
+    width: 70%;
+    border-radius: 90px 90px 0 0;
+    padding-left: 50px;
+    padding-right: 20px;
+}
+
+.message-input input {
+    border: none;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.message-input input:focus {
+    outline: none;
+}
+
+.message-container {
+    padding-bottom: 180px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    outline: none;
+}
+
+
+.message-bubble {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15px 25px;
+    background-color: black;
+    border-radius: 40px;
+    color: white;
+    width: 200px;
+    min-height: 50px;
+    margin-top: 70px;
+    word-break: break-word;
+    position: relative;
+}
+
+.message-bubble-self {
+    background-color: rgba(0, 0, 0, .7);
+}
+
+
+.user-header {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    text-align: right;
+    color: grey;
+}
+
+.message-meta {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right:20px;
+    font-size:10px;
+    height:100%;
+    justify-content: space-between;
+    padding-top: 5px;
+    padding-bottom:5px;
+    align-items:flex-start;
+}
+
+.message-bubble .username {
+    color: #FF7B7B;
+}

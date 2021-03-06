@@ -1,29 +1,117 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% for message in messages %}
-        <p>{{ message.text }}</p>
-    {% endfor %}
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
-    <input id="chat-message-input" type="text" size="100"><br>
-    <input id="chat-message-submit" type="button" value="Send">
-    {{ room_name|json_script:"room-name" }}
+
+    {% load static %}
+    {% load geochats_extras %}
+    <link rel="stylesheet" href="{% static 'geochats/styles/main.css' %}">
+    <div class="row navbar">
+        <span class="user-header">{{ user.username }}#{{ user.id }}</span>
+
+        <div class="col-sm-12 nav d-flex justify-content-center align-items-center">
+            <img src="{% static 'geochats/img/logo-text.svg' %}" class="img-fluid" style="max-height:80px;">
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row pt-5 messages">
+            <div class="offset-sm-3 col-sm-6 message-container" id="chat-log">
+
+                {% for message in messages %}
+                    <div class="row w-100">
+                        <div class="col-sm-12">
+                            <div class="message-bubble">
+                                <div class="message-meta">
+                                    <div class="username">
+                                        {% if message.user %}{{ message.user.username }}#{{ message.user.id }}{% else %}
+                                            Anon{% endif %}</div>
+                                    <div class="date">{{ message.date|convert_timezone:request.session.timezone|time }}</div>
+                                </div>
+                                <div>{{ message.text }}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+        <div class="row message-input">
+            <div class="col-sm-12">
+
+                <input id="chat-message-input" type="text" placeholder="Write a message...">
+                <input id="chat-message-submit" type="button" value="Send" class="w-25 mt-3"
+                       style="visibility: hidden">
+            </div>
+        </div>
+    </div>
     <script>
+        let currentScroll = $(window).scrollTop();
+        {#$(window).on('scroll', function () {#}
+        {#    check_scroll(2)#}
 
 
-        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+        function check_scroll(page) {
+            var scrollTop = $(window).scrollTop();
+            console.log(scrollTop-currentScroll)
+            if (scrollTop - currentScroll < -2000 * page) {
+                alert("DOWNLOADING...")
+            }
+        }
 
+        {#var scrollTop = $(window).scrollTop();#}
+        {#console.log($('html').prop('scrollHeight'))#}
+
+        function scrollMessagesBottom() {
+            document.querySelector('#chat-log').scrollTo(0, document.querySelector('#chat-log').scrollHeight);
+            document.querySelector('html').scrollTo(0, document.querySelector('html').scrollHeight);
+        }
+
+        scrollMessagesBottom()
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
             + '/ws/chat/'
-            {#+ roomName#}
-            {#+ '/'#}
             + 'room/'
         );
 
         chatSocket.onmessage = function (e) {
             const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.message + '\n');
+            let messageRow = document.createElement("div");
+            messageRow.classList.add("row");
+            messageRow.classList.add("w-100");
+            let messageColumn = document.createElement("div");
+
+            let messageBubble = document.createElement("div");
+            messageBubble.classList.add("message-bubble");
+
+
+            if (data.username === "{{ user.username }}#{{ user.id }}") {
+                messageBubble.classList.add("message-bubble-self");
+                messageColumn.classList.add("offset-sm-8");
+                messageColumn.classList.add("col-sm-4");
+            } else {
+                messageColumn.classList.add("col-sm-12");
+            }
+
+            let spanMessage = document.createElement("div");
+            let messageMeta = document.createElement("div")
+            messageMeta.classList.add("message-meta");
+            let usernameDiv = document.createElement("div");
+            let dateDiv = document.createElement("div");
+            dateDiv.classList.add("date");
+            usernameDiv.classList.add("username");
+            usernameDiv.textContent = data.username;
+            dateDiv.textContent = data.date;
+            messageMeta.appendChild(usernameDiv)
+            messageMeta.appendChild(dateDiv)
+            messageBubble.appendChild(messageMeta)
+            spanMessage.textContent = data.message;
+
+            messageBubble.appendChild(spanMessage);
+            messageColumn.appendChild(messageBubble);
+            messageRow.appendChild(messageColumn);
+            document.querySelector('#chat-log').appendChild(messageRow);
+            scrollMessagesBottom();
         };
 
         chatSocket.onclose = function (e) {
@@ -38,6 +126,7 @@
         };
 
         document.querySelector('#chat-message-submit').onclick = function (e) {
+            scrollMessagesBottom()
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
             chatSocket.send(JSON.stringify({
@@ -46,49 +135,12 @@
             messageInputDom.value = '';
         };
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
-
-        function showPosition(position) {
-
-            let lat = position.coords.latitude;
-            let long = position.coords.longitude;
-
-            console.log(lat, long);
-            $.ajax({
-                type: "GET",
-                url: "{% url 'geochats:ajax-location' %}",
-                data: {
-                    'lat': lat,
-                    'lng': long
-                },
-                success: function (data) {
-                    if (data.updated) {
-                        chatSocket.close()
-                    }
-                },
-
-                dataType: 'json'
-            });
-        }
-
-        getLocation()
-
 
         function showLocation(position) {
             var pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-
-            console.log(pos.lng)
-            console.log(pos.lat)
-            alert("Latitude : " + pos.lat + " Longitude: " + pos.lng);
         }
 
         function errorHandler(err) {
@@ -111,6 +163,6 @@
                 geoLoc.watchPosition(showLocation, errorHandler, options);
             }
         }
-    {#getLocationUpdate()#}
+
     </script>
 {% endblock content %}

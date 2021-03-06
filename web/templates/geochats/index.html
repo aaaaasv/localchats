@@ -6,7 +6,7 @@
         <input id="room-name-submit" type="submit" value="Start">
     </form>
     <script>
-            getLocation()
+        getLocation()
 
         function getLocation() {
             if (navigator.geolocation) {
@@ -20,17 +20,18 @@
 
             let lat = position.coords.latitude;
             let long = position.coords.longitude;
-            alert(lat + ' ' + long)
+            {#alert(lat + ' ' + long)#}
             console.log(lat, long);
             $.ajax({
                 type: "GET",
                 url: "{% url 'geochats:ajax-location' %}",
                 data: {
                     'lat': lat,
-                    'lng': long
+                    'lng': long,
+                    'time_offset': Intl.DateTimeFormat().resolvedOptions().timeZone,
                 },
                 success: function (data) {
-
+                    alert("OK")
                 },
 
                 dataType: 'json'

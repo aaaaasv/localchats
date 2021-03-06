@@ -2,12 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bf04f23-4310-4003-9814-fb847dfe6d63" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/geochats/migrations/0005_anonymoususer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/migrations/0006_auto_20210305_1118.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/migrations/0007_auto_20210305_1351.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/styles/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/templatetags/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/templatetags/geochats_extras.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/consumers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/localchats/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/localchats/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/geochats/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/geochats/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/geochats/map-test.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/geochats/map-test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/geochats/room.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/geochats/room.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +31,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="CSS File" />
         <option value="Python Script" />
       </list>
     </option>
@@ -38,6 +48,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -45,6 +56,7 @@
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -100,29 +112,34 @@
       <workItem from="1614676941975" duration="16240000" />
       <workItem from="1614756584455" duration="303000" />
       <workItem from="1614766452353" duration="3674000" />
-      <workItem from="1614857967645" duration="228000" />
+      <workItem from="1614857967645" duration="21009000" />
+      <workItem from="1614930715742" duration="24596000" />
+      <workItem from="1615030453918" duration="1009000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="299" y="274" key="FileChooserDialogImpl" timestamp="1614208215605">
+    <state x="299" y="274" key="FileChooserDialogImpl" timestamp="1614874755763">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="299" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1614208215605" />
+    <state x="299" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1614874755763" />
     <state x="21" y="164" key="SettingsEditor" timestamp="1614365056100">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="21" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1614365056100" />
-    <state x="202" y="253" width="585" height="534" key="find.popup" timestamp="1614693778790">
+    <state x="202" y="253" width="585" height="534" key="find.popup" timestamp="1614957936564">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="202" y="253" width="585" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1614693778790" />
-    <state x="143" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1614696593234">
+    <state x="202" y="253" width="585" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1614957936564" />
+    <state x="143" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1614943177424">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="143" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1614696593234" />
+    <state x="143" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1614943177424" />
   </component>
 </project>

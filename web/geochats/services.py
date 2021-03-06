@@ -3,7 +3,7 @@ from django.contrib.gis.geos import Point
 
 from django.conf import settings
 
-from geochats.models import PointCenter
+from geochats.models import Chat
 
 radius = settings.CHAT_IN_RADIUS
 
@@ -22,7 +22,7 @@ def get_or_create_chat(user_location):
 
 
 def get_chat(user_location):
-    chats = PointCenter.objects.all().filter(
+    chats = Chat.objects.all().filter(
         location__distance_lt=(
             user_location,
             Distance(m=radius)
@@ -31,8 +31,8 @@ def get_chat(user_location):
     # try:
     #     raise TypeError(
     #         'user_location: ', user_location.coords,
-    #         'created_chat: ', PointCenter.objects.all().first().location.coords,
-    #         get_distance(PointCenter.objects.all().first().location, user_location),
+    #         'created_chat: ', Chat.objects.all().first().location.coords,
+    #         get_distance(Chat.objects.all().first().location, user_location),
     #         chats,
     #     )
     # except AttributeError:
@@ -42,7 +42,7 @@ def get_chat(user_location):
 
 def create_chat(location):
     t = ChatRetrievingTriangle(key_sector=(50.43216, 30.52504), person_location=(location[1], location[0]))
-    PointCenter.objects.create(location=t.get_new_center())
+    Chat.objects.create(location=t.get_new_center())
 
 
 from math import sqrt
