@@ -37,7 +37,7 @@
         </div>
         <div class="row message-input">
             <div class="col-sm-12">
-
+                <span class="connection-status" id="connection-status"></span>
                 <input id="chat-message-input" type="text" placeholder="Write a message...">
                 <input id="chat-message-submit" type="button" value="Send" class="w-25 mt-3"
                        style="visibility: hidden">
@@ -52,7 +52,7 @@
 
         function check_scroll(page) {
             var scrollTop = $(window).scrollTop();
-            console.log(scrollTop-currentScroll)
+            console.log(scrollTop - currentScroll)
             if (scrollTop - currentScroll < -2000 * page) {
                 alert("DOWNLOADING...")
             }
@@ -67,13 +67,74 @@
         }
 
         scrollMessagesBottom()
-        const chatSocket = new WebSocket(
-            'ws://'
-            + window.location.host
-            + '/ws/chat/'
-            + 'room/'
-        );
 
+        var connectionStatus = document.querySelector('#connection-status');
+
+        function connectWebSocket() {
+            connectionStatus.style.color = "green";
+            connectionStatus.textContent = "Connection is establishing...";
+            let socket = new WebSocket(
+                'ws://'
+                + window.location.host
+                + '/ws/chat/'
+                + 'room/'
+            );
+
+            socket.onopen = function () {
+                connectionStatus.textContent = "Connection was successfully established.";
+                connectionStatus.style.color = "green";
+            }
+            return socket;
+
+        }
+
+        let chatSocket = connectWebSocket()
+
+
+        {#waitForSocketConnection(chatSocket)#}
+        {#function waitForSocketConnection(socket, callback) {#}
+        {#    console.log("checking connection status...")#}
+        {#    setTimeout(#}
+        {#        function () {#}
+        {#            if (socket.readyState === 1) {#}
+        {#                connectionStatus.textContent = "Connection was successfully established.";#}
+        {#                connectionStatus.style.color = "green";#}
+        {##}
+        {##}
+        {#                if (callback != null) {#}
+        {#                    callback();#}
+        {#                }#}
+        {#            } else if (socket.readyState === WebSocket.CONNECTING) {#}
+        {#                connectionStatus.style.color = "green";#}
+        {#                connectionStatus.textContent = "Connection is establishing...";#}
+        {##}
+        {#                waitForSocketConnection(socket, callback);#}
+        {#            } else {#}
+        {#                connectionStatus.style.color = "red";#}
+        {#                connectionStatus.textContent = "Connection closed.";#}
+        {#                waitForSocketConnection(socket, callback);#}
+        {#            }#}
+        {##}
+        {#        }, 5); // wait 5 milliseconds for the connection...#}
+        chatSocket.onclose = function (e) {
+            console.error('Chat socket closed unexpectedly');
+
+            if (chatSocket.readyState === WebSocket.CLOSED) {
+                connectionStatus.style.color = "red";
+                document.querySelector('#connection-status').textContent = "Connection closed";
+                let defaultReconnectTime = 5000;
+
+                document.querySelector('#connection-status').textContent = `Reconnecting in ${Math.min(10000, defaultReconnectTime += defaultReconnectTime) / 1000} seconds`;
+                setTimeout(
+                    function () {
+                        chatSocket = connectWebSocket();
+                        {#console.log(chatSocket.readyState)#}
+                    }, Math.min(10000, defaultReconnectTime += defaultReconnectTime));
+
+            }
+
+
+        };
         chatSocket.onmessage = function (e) {
             const data = JSON.parse(e.data);
             let messageRow = document.createElement("div");
@@ -114,9 +175,6 @@
             scrollMessagesBottom();
         };
 
-        chatSocket.onclose = function (e) {
-            console.error('Chat socket closed unexpectedly');
-        };
 
         document.querySelector('#chat-message-input').focus();
         document.querySelector('#chat-message-input').onkeyup = function (e) {
@@ -125,12 +183,14 @@
             }
         };
 
+
         document.querySelector('#chat-message-submit').onclick = function (e) {
             scrollMessagesBottom()
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
             chatSocket.send(JSON.stringify({
-                'message': message
+                'message': message,
+                {#'location':#}
             }));
             messageInputDom.value = '';
         };
@@ -141,6 +201,13 @@
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
+            console.log(pos.lat, pos.lng)
+            if (chatSocket.readyState === WebSocket.OPEN) {
+                chatSocket.send(JSON.stringify({
+                    'location': pos
+                }));
+            }
+
         }
 
         function errorHandler(err) {
@@ -164,5 +231,6 @@
             }
         }
 
+        getLocationUpdate()
     </script>
 {% endblock content %}

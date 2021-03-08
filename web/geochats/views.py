@@ -27,7 +27,7 @@ def room(request):
 def ajax_get_location(request):
     request.session['lat'] = request.GET['lat']
     request.session['lng'] = request.GET['lng']
-    print(request.session['lat'], request.session['lng'])
+    # print(request.session[])
     request.session['timezone'] = request.GET['time_offset']
     old_chat = request.session.get('room_id')
 

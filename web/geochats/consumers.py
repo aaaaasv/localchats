@@ -42,27 +42,35 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         # new message written
         text_data_json = json.loads(text_data)
-        message = text_data_json['message']
-        message_db = await self.save_message(message)
-        # Send message to room group
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
-                'type': 'chat_message',
-                'message': message,
-                'user': self.username,
-                'date': json.dumps(message_db.date.strftime("%I:%M %p"), cls=DjangoJSONEncoder)
-            }
-        )
-        # location = text_data_json['location']
-        # if location:
-        #     self.room_name = self.get_nearest_chat(location)
-        #     self.room_group_name = f'chat_{self.room_name}'
-        #
-        #     await self.channel_layer.group_add(
-        #         self.room_group_name,
-        #         self.channel_name
-        #     )
+        message = text_data_json.get('message')
+        if message:
+            message_db = await self.save_message(message)
+            # Send message to room group
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'chat_message',
+                    'message': message,
+                    'user': self.username,
+                    'date': json.dumps(message_db.date.strftime("%I:%M %p"), cls=DjangoJSONEncoder)
+                }
+            )
+        location = text_data_json.get('location')
+        if location:
+            location = Point(location['lng'], location['lat'])
+            self.room_name = await self.get_nearest_chat(location)
+            old_room_group_name = self.room_group_name
+            self.room_group_name = f'chat_{self.room_name}'
+            if old_room_group_name != self.room_group_name:
+                print("CHANGING ROOM NAME")
+                await self.channel_layer.group_discard(
+                    old_room_group_name,
+                    self.channel_name
+                )
+                await self.channel_layer.group_add(
+                    self.room_group_name,
+                    self.channel_name
+                )
         #
         #     await self.send(text_data=json.dumps({
         #

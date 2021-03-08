@@ -124,3 +124,9 @@
 .message-bubble .username {
     color: #FF7B7B;
 }
+
+
+.connection-status {
+    position: absolute;
+    top: -35px;
+}
