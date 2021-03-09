@@ -13,15 +13,27 @@ def index(request):
 
 
 def room(request):
-    update_room_id(request)
-    messages = Chat.objects.get(id=request.session['room_id']).message_set.all()
-    user = AnonymousUser.objects.create()
-    request.session['user_id'] = user.id
+    # raise TypeError(request.session['user_id'])
+    # user = AnonymousUser.objects.create()
+    # print(AnonymousUser.objects.get(id=request.session['user_id']).username)
     return render(request, 'geochats/room.html',
                   {
-                      'messages': messages,
-                      'user': user
+                      'messages': None,
+                      'user': None
                   })
+
+
+from django.views.decorators.csrf import csrf_exempt
+
+
+@csrf_exempt
+def ajax_save_user(request):
+    user_id = request.POST.get('user_id', None)
+
+    if user_id:
+        request.session['user_id'] = user_id
+        request.session['user_persistence'] = True
+    return JsonResponse({'success': "Ok"})
 
 
 def ajax_get_location(request):
@@ -45,8 +57,12 @@ def ajax_get_location(request):
 
 
 def map_test(request):
+    points = []
+    for i in Chat.objects.all():
+        points.append([i.location[0], i.location[1]])
     context = {
-        'points': [[30.1345542, 50.8018212], [30.1303865, 50.8059638]]
+        # 'points': [[30.1345542, 50.8018212], [30.1303865, 50.8059638]]
+        'points': points
     }
 
     return render(request, 'geochats/map-test.html', context)

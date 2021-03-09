@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:localchats" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="7bf04f23-4310-4003-9814-fb847dfe6d63" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/js/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/js/websocket-handler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/consumers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/static/geochats/styles/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/static/geochats/styles/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/localchats/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/localchats/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/geochats/room.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/geochats/room.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +44,7 @@
         <option value="HTML File" />
         <option value="CSS File" />
         <option value="Python Script" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -106,7 +129,10 @@
       <workItem from="1615030453918" duration="8601000" />
       <workItem from="1615117298950" duration="611000" />
       <workItem from="1615145940771" duration="599000" />
-      <workItem from="1615209670663" duration="343000" />
+      <workItem from="1615209670663" duration="6225000" />
+      <workItem from="1615222414634" duration="6230000" />
+      <workItem from="1615287374588" duration="4549000" />
+      <workItem from="1615302515504" duration="18025000" />
     </task>
     <servers />
   </component>
@@ -123,6 +149,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -140,9 +167,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="202" y="253" width="585" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1614957936564" />
-    <state x="143" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1614943177424">
+    <state x="143" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1615228094636">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="143" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1614943177424" />
+    <state x="143" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1615228094636" />
   </component>
 </project>

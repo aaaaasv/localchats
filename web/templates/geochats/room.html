@@ -1,15 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
-
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
     {% load static %}
     {% load geochats_extras %}
     <link rel="stylesheet" href="{% static 'geochats/styles/main.css' %}">
-    <div class="row navbar">
-        <span class="user-header">{{ user.username }}#{{ user.id }}</span>
+    <span class="user-header">{{ user.username }}#{{ user.id }}</span>
+    <span class="room-header">Room <span></span></span>
 
-        <div class="col-sm-12 nav d-flex justify-content-center align-items-center">
+    <div class="row navbar" id="navbar-main" style="background-color: black">
+
+
+        <div class="col-sm-12 nav d-flex justify-content-center align-items-end h-100 pb-5">
+            <div class="open-menu">
+<span class="material-icons-outlined material-icons open-menu-arrow">
+keyboard_arrow_down
+</span>
+            </div>
+            <input placeholder="username" class="username-change">
             <img src="{% static 'geochats/img/logo-text.svg' %}" class="img-fluid" style="max-height:80px;">
         </div>
+    </div>
+    <div class="scroll-bottom" id="scroll-bottom-arrow">
+<span class="material-icons-outlined material-icons scroll-bottom-arrow">
+keyboard_arrow_down
+</span>
     </div>
     <div class="container-fluid">
         <div class="row pt-5 messages">
@@ -44,193 +61,27 @@
             </div>
         </div>
     </div>
+{#    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>#}
+
     <script>
-        let currentScroll = $(window).scrollTop();
-        {#$(window).on('scroll', function () {#}
-        {#    check_scroll(2)#}
+        function saveUser(user_id) {
+            console.log(user_id, 'sending...')
+            $.ajax({
+                type: "POST",
+                url: "{% url 'geochats:ajax-save-user' %}",
+                data: {
+                    'user_id': user_id,
+                    {#csrfmiddlewaretoken: Cookies.get('csrftoken')#}
+                },
+                success: function (data) {
+                    console.log("user id was successfully save to session storage")
+                },
 
-
-        function check_scroll(page) {
-            var scrollTop = $(window).scrollTop();
-            console.log(scrollTop - currentScroll)
-            if (scrollTop - currentScroll < -2000 * page) {
-                alert("DOWNLOADING...")
-            }
+                dataType: 'json'
+            });
         }
-
-        {#var scrollTop = $(window).scrollTop();#}
-        {#console.log($('html').prop('scrollHeight'))#}
-
-        function scrollMessagesBottom() {
-            document.querySelector('#chat-log').scrollTo(0, document.querySelector('#chat-log').scrollHeight);
-            document.querySelector('html').scrollTo(0, document.querySelector('html').scrollHeight);
-        }
-
-        scrollMessagesBottom()
-
-        var connectionStatus = document.querySelector('#connection-status');
-
-        function connectWebSocket() {
-            connectionStatus.style.color = "green";
-            connectionStatus.textContent = "Connection is establishing...";
-            let socket = new WebSocket(
-                'ws://'
-                + window.location.host
-                + '/ws/chat/'
-                + 'room/'
-            );
-
-            socket.onopen = function () {
-                connectionStatus.textContent = "Connection was successfully established.";
-                connectionStatus.style.color = "green";
-            }
-            return socket;
-
-        }
-
-        let chatSocket = connectWebSocket()
-
-
-        {#waitForSocketConnection(chatSocket)#}
-        {#function waitForSocketConnection(socket, callback) {#}
-        {#    console.log("checking connection status...")#}
-        {#    setTimeout(#}
-        {#        function () {#}
-        {#            if (socket.readyState === 1) {#}
-        {#                connectionStatus.textContent = "Connection was successfully established.";#}
-        {#                connectionStatus.style.color = "green";#}
-        {##}
-        {##}
-        {#                if (callback != null) {#}
-        {#                    callback();#}
-        {#                }#}
-        {#            } else if (socket.readyState === WebSocket.CONNECTING) {#}
-        {#                connectionStatus.style.color = "green";#}
-        {#                connectionStatus.textContent = "Connection is establishing...";#}
-        {##}
-        {#                waitForSocketConnection(socket, callback);#}
-        {#            } else {#}
-        {#                connectionStatus.style.color = "red";#}
-        {#                connectionStatus.textContent = "Connection closed.";#}
-        {#                waitForSocketConnection(socket, callback);#}
-        {#            }#}
-        {##}
-        {#        }, 5); // wait 5 milliseconds for the connection...#}
-        chatSocket.onclose = function (e) {
-            console.error('Chat socket closed unexpectedly');
-
-            if (chatSocket.readyState === WebSocket.CLOSED) {
-                connectionStatus.style.color = "red";
-                document.querySelector('#connection-status').textContent = "Connection closed";
-                let defaultReconnectTime = 5000;
-
-                document.querySelector('#connection-status').textContent = `Reconnecting in ${Math.min(10000, defaultReconnectTime += defaultReconnectTime) / 1000} seconds`;
-                setTimeout(
-                    function () {
-                        chatSocket = connectWebSocket();
-                        {#console.log(chatSocket.readyState)#}
-                    }, Math.min(10000, defaultReconnectTime += defaultReconnectTime));
-
-            }
-
-
-        };
-        chatSocket.onmessage = function (e) {
-            const data = JSON.parse(e.data);
-            let messageRow = document.createElement("div");
-            messageRow.classList.add("row");
-            messageRow.classList.add("w-100");
-            let messageColumn = document.createElement("div");
-
-            let messageBubble = document.createElement("div");
-            messageBubble.classList.add("message-bubble");
-
-
-            if (data.username === "{{ user.username }}#{{ user.id }}") {
-                messageBubble.classList.add("message-bubble-self");
-                messageColumn.classList.add("offset-sm-8");
-                messageColumn.classList.add("col-sm-4");
-            } else {
-                messageColumn.classList.add("col-sm-12");
-            }
-
-            let spanMessage = document.createElement("div");
-            let messageMeta = document.createElement("div")
-            messageMeta.classList.add("message-meta");
-            let usernameDiv = document.createElement("div");
-            let dateDiv = document.createElement("div");
-            dateDiv.classList.add("date");
-            usernameDiv.classList.add("username");
-            usernameDiv.textContent = data.username;
-            dateDiv.textContent = data.date;
-            messageMeta.appendChild(usernameDiv)
-            messageMeta.appendChild(dateDiv)
-            messageBubble.appendChild(messageMeta)
-            spanMessage.textContent = data.message;
-
-            messageBubble.appendChild(spanMessage);
-            messageColumn.appendChild(messageBubble);
-            messageRow.appendChild(messageColumn);
-            document.querySelector('#chat-log').appendChild(messageRow);
-            scrollMessagesBottom();
-        };
-
-
-        document.querySelector('#chat-message-input').focus();
-        document.querySelector('#chat-message-input').onkeyup = function (e) {
-            if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#chat-message-submit').click();
-            }
-        };
-
-
-        document.querySelector('#chat-message-submit').onclick = function (e) {
-            scrollMessagesBottom()
-            const messageInputDom = document.querySelector('#chat-message-input');
-            const message = messageInputDom.value;
-            chatSocket.send(JSON.stringify({
-                'message': message,
-                {#'location':#}
-            }));
-            messageInputDom.value = '';
-        };
-
-
-        function showLocation(position) {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            console.log(pos.lat, pos.lng)
-            if (chatSocket.readyState === WebSocket.OPEN) {
-                chatSocket.send(JSON.stringify({
-                    'location': pos
-                }));
-            }
-
-        }
-
-        function errorHandler(err) {
-            if (err.code === 1) {
-                alert("Error: Access is denied!");
-            } else if (err.code === 2) {
-                alert("Error: Position is unavailable!");
-            }
-        }
-
-        function getLocationUpdate() {
-            if (navigator.geolocation) {
-                // timeout at 60000 milliseconds (60 seconds)
-                var options = {
-                    enableHighAccuracy: true,
-                    timeout: 5000,
-                    maximumAge: 0
-                };
-                var geoLoc = navigator.geolocation;
-                geoLoc.watchPosition(showLocation, errorHandler, options);
-            }
-        }
-
-        getLocationUpdate()
     </script>
+    <script type="text/javascript" src="{% static "geochats/js/websocket-handler.js" %}"></script>
+    <script type="text/javascript" src="{% static "geochats/js/script.js" %}"></script>
+
 {% endblock content %}
