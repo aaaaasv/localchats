@@ -54,10 +54,9 @@ function connectWebSocket() {
             }
 
         } else {
-            if (message.user__username === undefined) {
-                username = 'Anon';
-            } else {
-                username = message.user__username;
+            username = message.user__username;
+            if (username === undefined || username === null) {
+                username = "Anon"
             }
         }
         let messageRow = document.createElement("div");
@@ -100,11 +99,10 @@ function connectWebSocket() {
         const data = JSON.parse(e.data);
         if (data.room_id) {
             $('.room-header span').text(data.room_id)
-            console.log("OK")
         }
         if (data.user) {
             user = data.user;
-            console.log("SAVING USER", user.id)
+            $(".username-change input").val(user.username)
             saveUser(user.id);
             return;
         }

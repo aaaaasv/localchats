@@ -19,7 +19,10 @@
 keyboard_arrow_down
 </span>
             </div>
-            <input placeholder="username" class="username-change">
+            <div class="username-change">
+                <label for="username" class="mb-3">Change your username</label>
+                <input name="username" placeholder="username">
+            </div>
             <img src="{% static 'geochats/img/logo-text.svg' %}" class="img-fluid" style="max-height:80px;">
         </div>
     </div>
@@ -61,7 +64,7 @@ keyboard_arrow_down
             </div>
         </div>
     </div>
-{#    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>#}
+    {#    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>#}
 
     <script>
         function saveUser(user_id) {

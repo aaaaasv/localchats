@@ -20,14 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bf04f23-4310-4003-9814-fb847dfe6d63" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/js/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/js/websocket-handler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/geochats/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/consumers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/static/geochats/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/static/geochats/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/static/geochats/js/websocket-handler.js" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/static/geochats/js/websocket-handler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/static/geochats/styles/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/static/geochats/styles/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/geochats/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/geochats/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/localchats/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/localchats/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/geochats/room.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/geochats/room.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,7 +128,8 @@
       <workItem from="1615209670663" duration="6225000" />
       <workItem from="1615222414634" duration="6230000" />
       <workItem from="1615287374588" duration="4549000" />
-      <workItem from="1615302515504" duration="18025000" />
+      <workItem from="1615302515504" duration="19562000" />
+      <workItem from="1615389680660" duration="2183000" />
     </task>
     <servers />
   </component>

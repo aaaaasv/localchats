@@ -8,7 +8,6 @@ body {
 
 ::-webkit-scrollbar {
     width: 10px;
-
 }
 
 ::-webkit-scrollbar-track {
@@ -18,11 +17,11 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background: black;
-    border-radius: 10px;
+    border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: gray;
+    background: rgba(0, 0, 0, .8);
 }
 
 .navbar {
@@ -147,7 +146,6 @@ body {
 .connection-status {
     position: absolute;
     top: -35px;
-    transition: 1s;
     z-index: 0;
 }
 
@@ -156,7 +154,6 @@ body {
     right: 50px;
     bottom: 50px;
     cursor: pointer;
-    /*background-color: rgba(0, 0, 0, 1);*/
     height: 30px;
     width: 30px;
     transition: .2s;
@@ -165,52 +162,61 @@ body {
     align-items: center;
 }
 
-.scroll-bottom:hover {
-    /*background-color: rgba(0, 0, 0, .9);*/
-}
 
 .scroll-bottom-arrow {
     color: white;
     font-size: 50px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, .5);
     border-radius: 5px;
 }
 
 .scroll-bottom-arrow:hover {
-    background-color: rgba(0, 0, 0, .9);
+    background-color: rgba(0, 0, 0, .3);
 }
 
 .open-menu {
     position: absolute;
     bottom: -5%;
     text-align: center;
-    z-index: 1500;
+    z-index: 1700;
 }
 
 .open-menu-arrow {
     cursor: pointer;
     transition: .5s;
-    font-size:35px;
+    font-size: 35px;
 }
+
 .open-menu-arrow:hover {
     transform: translateY(5px);
 }
+
 .username-change {
-    width:280px;
-    height:60px;
-    background-color: white;
-    border-radius: 100px;
-    border:1px solid black;
-    padding-left: 30px;
     position: absolute;
-    z-index:1600;
-    top:0;
+    z-index: 1600;
+    top: 0;
     bottom: 0;
     left: 0;
-    right:0;
+    right: 0;
     margin: auto;
     display: none;
+    justify-content: center;
+    align-items: center;
 }
-.username-change:focus {
+
+.username-change label {
+    color: white;
+}
+
+.username-change input {
+    width: 280px;
+    height: 60px;
+    background-color: white;
+    border-radius: 100px;
+    border: 1px solid black;
+    padding-left: 30px;
+}
+
+.username-change input:focus {
     outline: none;
 }

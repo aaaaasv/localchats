@@ -26,11 +26,16 @@ function check_scroll(page) {
         alert("DOWNLOADING...")
     }
     if (scrollBottom >= 60) {
-        +$('#scroll-bottom-arrow').fadeIn()
         hideConnectionStatus()
     } else {
         showConnectionStatus()
+    }
+    if (scrollBottom >= 400) {
+        $('#scroll-bottom-arrow').fadeIn()
+
+    } else {
         $('#scroll-bottom-arrow').fadeOut()
+
     }
 }
 
@@ -118,16 +123,18 @@ let isSettingsMenuOpen = false;
 function openSettingsMenu() {
     $(".navbar").css("margin-top", 0);
     $(".open-menu-arrow").css("transform", "rotate(180deg) translateY(50px)");
-    $(this).css("color", "white");
-    $(".username-change").show()
+    $(".open-menu-arrow").css("color", "white");
+    $(".username-change").fadeIn()
+    $(".username-change").css('display', 'flex')
+    $(".username-change").css('flex-direction', 'column')
     isSettingsMenuOpen = true;
 }
 
 function closeSettingsMenu() {
     $(".navbar").css("margin-top", "-80vh");
     $(".open-menu-arrow").css("transform", "translateY(5px)");
-    $(this).css("color", "black");
-    $(".username-change").hide()
+    $(".open-menu-arrow").css("color", "black");
+    $(".username-change").fadeOut()
     isSettingsMenuOpen = false;
 }
 
@@ -140,8 +147,8 @@ $(".open-menu").on("click", function () {
 })
 
 
-$(".username-change").on("change", function () {
+$(".username-change input").on("change", function () {
     chatSocket.send(JSON.stringify({
-        'username':$(this).val()
+        'username': $(this).val()
     }));
 })
