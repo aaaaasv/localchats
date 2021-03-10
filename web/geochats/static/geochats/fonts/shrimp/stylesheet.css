@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Shrimp';
+    src: url('Shrimp-Regular.eot');
+    src: url('Shrimp-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Shrimp-Regular.woff2') format('woff2'),
+        url('Shrimp-Regular.woff') format('woff'),
+        url('Shrimp-Regular.ttf') format('truetype'),
+        url('Shrimp-Regular.svg#Shrimp-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

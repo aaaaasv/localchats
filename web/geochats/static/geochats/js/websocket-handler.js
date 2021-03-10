@@ -46,18 +46,15 @@ function connectWebSocket() {
 
     function drawMessage(message) {
         var username;
-        console.log(message)
-        if (message.user !== undefined) {
-            username = message.user.username;
-            if (username === undefined) {
-                username = message.user;
-            }
+        if (message.username !== undefined) {
+            username = message.username;
 
         } else {
-            username = message.user__username;
+            username = message.username__username
             if (username === undefined || username === null) {
                 username = "Anon"
             }
+
         }
         let messageRow = document.createElement("div");
         messageRow.classList.add("row");
@@ -66,8 +63,8 @@ function connectWebSocket() {
 
         let messageBubble = document.createElement("div");
         messageBubble.classList.add("message-bubble");
-        console.log(username, user.username)
-        if (username === `${user.username}`) {
+        console.log(message.username__user__id, user.id)
+        if (message.username__user__id === user.id || message.user_id === user.id) {
             messageBubble.classList.add("message-bubble-self");
             messageColumn.classList.add("offset-sm-8");
             messageColumn.classList.add("col-sm-4");
@@ -107,7 +104,6 @@ function connectWebSocket() {
             return;
         }
         if (data.old_messages) {
-            console.log("receiving old messages by user", user.id)
             let messages = JSON.parse(data.old_messages);
             for (i = 0; i < messages.length; i++) {
                 drawMessage(messages[i])

@@ -2,8 +2,14 @@ body {
     position: relative;
 }
 
-::-moz-selection, ::selection {
-    background-color: #FF7B7B;
+::-moz-selection {
+    color: white;
+    background: #FF7B7B;
+}
+
+::selection {
+    color: white;
+    background: #FF7B7B;
 }
 
 ::-webkit-scrollbar {
@@ -31,7 +37,8 @@ body {
     padding: 0;
     margin: 0;
     z-index: 101;
-    transition: 1s;
+    /*transition: 1s;*/
+    transition: all 1s cubic-bezier(0.5, 0.3, 0.1, 0.3);
     height: 100vh;
 }
 
@@ -112,7 +119,7 @@ body {
     position: fixed;
     top: 10px;
     text-align: right;
-    color: grey;
+    color: #FF7B7B;
     z-index: 1000;
 }
 
@@ -219,4 +226,23 @@ body {
 
 .username-change input:focus {
     outline: none;
+}
+
+.logo-text {
+    text-align: center;
+    margin-bottom: -25px;
+    transition: .5s;
+}
+
+.logo-text img {
+    cursor: pointer;
+}
+
+.logo-subtitle {
+    font-family: 'Shrimp';
+    font-weight: normal;
+    font-style: normal;
+    margin-top: 10px;
+    font-size: 20px;
+    color: white;
 }

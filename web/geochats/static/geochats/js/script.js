@@ -122,18 +122,23 @@ let isSettingsMenuOpen = false;
 
 function openSettingsMenu() {
     $(".navbar").css("margin-top", 0);
+    $(".navbar").css("opacity", .95);
     $(".open-menu-arrow").css("transform", "rotate(180deg) translateY(50px)");
     $(".open-menu-arrow").css("color", "white");
-    $(".username-change").fadeIn()
-    $(".username-change").css('display', 'flex')
-    $(".username-change").css('flex-direction', 'column')
+    $(".username-change").fadeIn();
+    $(".username-change").css('display', 'flex');
+    $(".username-change").css('flex-direction', 'column');
+    $(".logo-text").css("margin-bottom", "20px");
     isSettingsMenuOpen = true;
 }
 
 function closeSettingsMenu() {
     $(".navbar").css("margin-top", "-80vh");
+    $(".navbar").css("opacity", 1);
     $(".open-menu-arrow").css("transform", "translateY(5px)");
     $(".open-menu-arrow").css("color", "black");
+    $(".logo-text").css("margin-bottom", "-25px")
+
     $(".username-change").fadeOut()
     isSettingsMenuOpen = false;
 }
