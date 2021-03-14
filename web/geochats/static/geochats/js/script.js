@@ -122,7 +122,7 @@ let isSettingsMenuOpen = false;
 
 function openSettingsMenu() {
     $(".navbar").css("margin-top", 0);
-    $(".navbar").css("opacity", .95);
+    $(".navbar .nav").css("background-color", 'rgba(0,0,0,.95)');
     $(".open-menu-arrow").css("transform", "rotate(180deg) translateY(50px)");
     $(".open-menu-arrow").css("color", "white");
     $(".username-change").fadeIn();
@@ -134,7 +134,7 @@ function openSettingsMenu() {
 
 function closeSettingsMenu() {
     $(".navbar").css("margin-top", "-80vh");
-    $(".navbar").css("opacity", 1);
+    $(".navbar .nav").css("background-color", 'rgba(0,0,0,1)');
     $(".open-menu-arrow").css("transform", "translateY(5px)");
     $(".open-menu-arrow").css("color", "black");
     $(".logo-text").css("margin-bottom", "-25px")

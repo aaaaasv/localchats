@@ -7,7 +7,8 @@ from geochats.models import Chat
 
 radius = settings.CHAT_IN_RADIUS
 
-key_sector_coords = (50.43216, 30.52504)
+# key_sector_coords = (50.43216, 30.52504) # seed
+key_sector_coords = (50.805641, 30.130366)  # seed
 
 
 def get_or_create_chat(user_location):

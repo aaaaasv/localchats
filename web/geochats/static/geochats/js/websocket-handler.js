@@ -7,7 +7,7 @@ function connectWebSocket() {
     connectionStatus.textContent = "Connection is establishing...";
     console.log("Connection started.")
     chatSocket = new WebSocket(
-        'ws://'
+        'wss://'
         + window.location.host
         + '/ws/chat/'
         + 'room/'

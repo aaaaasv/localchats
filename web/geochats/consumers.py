@@ -20,8 +20,9 @@ from geochats.services import (
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.isUserPersistent = False
-        user_persistence, self.user = await self.get_or_create_user()
-        if user_persistence:
+        self.user_persistence, self.user = await self.get_or_create_user()
+        print('user_persistene= ', self.user_persistence)
+        if self.user_persistence:
             print("GETTING LAST")
             await self.set_last_username()
         else:
@@ -84,6 +85,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         old_room_id = text_data_json.get('old_room_id')
         username = text_data_json.get('username')
         if username:
+            print("SETTING NEW USERNAME", username)
             await self.set_custom_username(username)
         if location:
             self.scope['session']['lat'] = location['lat']
@@ -180,6 +182,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             user = AnonymousUser.objects.get(id=self.scope['session']['user_id'])
             self.scope['session']['user_id'] = user.id
             user_persistence = True
+            print("USER HAS BEEN FOUND, user_persistence= ", user_persistence)
         except (KeyError, TypeError, AnonymousUser.DoesNotExist):
             user = AnonymousUser.objects.create()
             self.user = user

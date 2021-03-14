@@ -20,21 +20,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bf04f23-4310-4003-9814-fb847dfe6d63" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/geochats/migrations/0008_auto_20210310_1641.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/fonts/shrimp/Shrimp-Regular.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/fonts/shrimp/Shrimp-Regular.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/fonts/shrimp/Shrimp-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/fonts/shrimp/Shrimp-Regular.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/fonts/shrimp/Shrimp-Regular.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/fonts/shrimp/stylesheet.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/img/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/img/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/img/google-logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/img/signup-map - Copy (2).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/img/signup-map - Copy (3).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/img/signup-map - Copy (4).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/img/signup-map - Copy.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/img/signup-map.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/js/registration.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/static/geochats/styles/regsitration.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/signup.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/consumers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/geochats/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/static/geochats/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/static/geochats/js/script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/static/geochats/js/websocket-handler.js" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/static/geochats/js/websocket-handler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/static/geochats/styles/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/static/geochats/styles/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/localchats/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/localchats/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/localchats/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/localchats/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/geochats/map-test.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/geochats/map-test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/geochats/room.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/geochats/room.html" afterDir="false" />
@@ -50,9 +54,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Script" />
         <option value="HTML File" />
         <option value="CSS File" />
-        <option value="Python Script" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -143,7 +147,9 @@
       <workItem from="1615222414634" duration="6230000" />
       <workItem from="1615287374588" duration="4549000" />
       <workItem from="1615302515504" duration="19562000" />
-      <workItem from="1615389680660" duration="12431000" />
+      <workItem from="1615389680660" duration="14611000" />
+      <workItem from="1615462432750" duration="6852000" />
+      <workItem from="1615737972108" duration="8869000" />
     </task>
     <servers />
   </component>
@@ -170,30 +176,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="299" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1614874755763" />
-    <state width="916" height="279" key="GridCell.Tab.0.bottom" timestamp="1615398575895">
+    <state width="916" height="279" key="GridCell.Tab.0.bottom" timestamp="1615418958548">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="916" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1615398575895" />
-    <state width="916" height="279" key="GridCell.Tab.0.center" timestamp="1615398575895">
+    <state width="916" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1615418958548" />
+    <state width="916" height="279" key="GridCell.Tab.0.center" timestamp="1615418958548">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="916" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1615398575895" />
-    <state width="916" height="279" key="GridCell.Tab.0.left" timestamp="1615398575895">
+    <state width="916" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1615418958548" />
+    <state width="916" height="279" key="GridCell.Tab.0.left" timestamp="1615418958548">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="916" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1615398575895" />
-    <state width="916" height="279" key="GridCell.Tab.0.right" timestamp="1615398575895">
+    <state width="916" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1615418958548" />
+    <state width="916" height="279" key="GridCell.Tab.0.right" timestamp="1615418958548">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="916" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1615398575895" />
+    <state width="916" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1615418958548" />
     <state x="21" y="164" key="SettingsEditor" timestamp="1614365056100">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="21" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1614365056100" />
-    <state x="202" y="253" width="585" height="534" key="find.popup" timestamp="1614957936564">
+    <state x="202" y="253" width="585" height="534" key="find.popup" timestamp="1615743059750">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="202" y="253" width="585" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1614957936564" />
+    <state x="202" y="253" width="585" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1615743059750" />
     <state x="143" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1615228094636">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -1,0 +1,158 @@
+.map-container {
+    height: 100vh;
+    position: absolute;
+    left: -3px;
+    overflow: hidden;
+    z-index: -10;
+}
+
+.map-container img {
+    max-width: 90%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.card-form {
+    height: 650px;
+    width: 400px;
+    /*border: 1px solid black;*/
+    background-color: white;
+    border-radius: 35px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    -webkit-box-shadow: 10px 10px 19px -9px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 19px -9px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 19px -9px rgba(0, 0, 0, 0.75);
+}
+
+.field {
+    width: 200px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 35px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size:13px;
+}
+
+.field:focus {
+    outline: none;
+    border-width: 2px;
+}
+
+.field-label {
+    transition: .3s;
+    position: absolute;
+    left: 5%;
+    top: -25%;
+    background-color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 13px;
+    border-radius:50px;
+}
+
+.card-form .btn-auth-group .btn-submit {
+    background-color: #FF7B7B;
+    color: white;
+    font-size: 20px;
+    width: 160px;
+    height: 50px;
+    border-radius: 60px;
+    transition: background-color .3s;
+}
+
+.card-form .btn-auth-group .btn-submit:hover {
+    background-color: #f65959;
+}
+.card-form .btn-auth-group .btn-submit:focus {
+    border:2px solid black;
+    box-shadow:none;
+}
+
+
+.card-form .btn-auth-group .btn-google {
+    width: 230px;
+    height: 48px;
+    background-color: black;
+    font-size: 15px;
+    color: white;
+    font-weight: 300;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.btn-auth-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-form .subtitle {
+    position: relative;
+}
+
+.nsymbol {
+    font-size: 500px;
+    -webkit-text-stroke: 1px #FF7B7B;
+    color: transparent;
+    font-weight: 800;
+    z-index: -20;
+    right: -80%;
+    position: absolute;
+}
+
+.subtitle-text {
+    position: absolute;
+    left: 120%;
+    font-size: 43px;
+    line-height: 45px;
+    color: black;
+    font-family: 'Shrimp';
+    font-weight: normal;
+    font-style: normal;
+}
+
+.logo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.logo .logo-text {
+    font-family: 'Shrimp';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 30px;
+    margin-right: 25px;
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+
+.logo .logo-img {
+    background-color: black;
+    border-radius: 0 0 0 45px;
+    height: 150px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.logo .logo-img:hover {
+    background-color: rgba(0, 0, 0, .9);
+}

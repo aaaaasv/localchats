@@ -10,12 +10,12 @@
     <span class="user-header">{{ user.username }}#{{ user.id }}</span>
     <span class="room-header">Room <span></span></span>
 
-    <div class="row navbar" id="navbar-main" style="background-color: black">
+    <div class="row navbar" id="navbar-main">
 
 
         <div class="col-sm-12 nav d-flex justify-content-center align-items-end h-100 pb-5">
             <div class="open-menu">
-<span class="material-icons-outlined material-icons open-menu-arrow">
+<span class="material-icons-outlined material-icons open-menu-arrow noselect">
 keyboard_arrow_down
 </span>
             </div>
@@ -24,7 +24,7 @@ keyboard_arrow_down
                 <input name="username" placeholder="username">
             </div>
             <div class="logo-text">
-                <img src="{% static 'geochats/img/logo.png' %}" class="img-fluid" style="max-height:80px;">
+                <img src="{% static 'geochats/img/logo.png' %}" class="img-fluid noselect" style="max-height:80px;">
                 <div class="logo-subtitle">NEAREST</div>
             </div>
         </div>

@@ -135,8 +135,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-CHAT_IN_RADIUS = 120  # meters
-CHAT_SQUARE_SIDE = 60  # meters
+CHAT_IN_RADIUS = 150  # meters. radius for finding chats around user
+CHAT_SQUARE_SIDE = 20  # meters. side of the square for one chat
 
 ASGI_APPLICATION = 'localchats.asgi.application'
 CHANNEL_LAYERS = {

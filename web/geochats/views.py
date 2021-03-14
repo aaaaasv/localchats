@@ -55,14 +55,22 @@ def ajax_get_location(request):
         }
     return JsonResponse(context)
 
+from .services import key_sector_coords
 
 def map_test(request):
     points = []
     for i in Chat.objects.all():
         points.append([i.location[0], i.location[1]])
+    points.append([key_sector_coords[1], key_sector_coords[0]])
+    points.append([30.52504, 50.43216])
     context = {
         # 'points': [[30.1345542, 50.8018212], [30.1303865, 50.8059638]]
         'points': points
     }
 
     return render(request, 'geochats/map-test.html', context)
+
+
+
+def signup(request):
+    return render(request, 'registration/signup.html')

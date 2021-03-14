@@ -37,13 +37,22 @@ body {
     padding: 0;
     margin: 0;
     z-index: 101;
-    /*transition: 1s;*/
     transition: all 1s cubic-bezier(0.5, 0.3, 0.1, 0.3);
     height: 100vh;
 }
 
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, Chrome, Edge, Opera and Firefox */
+}
 
 .nav {
+    transition: .5s;
     height: 170px;
     background-color: black;
 }

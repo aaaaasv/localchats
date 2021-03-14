@@ -17,6 +17,32 @@
 <h2>Chats Map</h2>
 <div id="map" class="map"></div>
 <script type="text/javascript">
+    import {getPointResolution} from 'ol/proj';
+
+    function drawCircleInMeter(map, radius) {
+        var view = map.getView();
+        var projection = view.getProjection();
+        var resolutionAtEquator = view.getResolution();
+        var center = map.getView().getCenter();
+        console.log(center)
+var pointResolution = getPointResolution(projection, resolutionAtEquator, center);        var resolutionFactor = resolutionAtEquator / pointResolution;
+        var radius = (radius / ol.proj.METERS_PER_UNIT.m) * resolutionFactor;
+
+
+        var circle = new ol.geom.Circle(center, radius);
+        var circleFeature = new ol.Feature(circle);
+
+        // Source and vector layer
+        var vectorSource = new ol.source.Vector({
+            projection: 'EPSG:4326'
+        });
+        vectorSource.addFeature(circleFeature);
+        var vectorLayer = new ol.layer.Vector({
+            source: vectorSource
+        });
+
+        map.addLayer(vectorLayer);
+    }
 
     var map = new ol.Map({
         target: 'map',
@@ -27,7 +53,7 @@
         ],
         view: new ol.View({
             center: ol.proj.fromLonLat([30.52504, 50.43216]),
-            zoom: 7
+            zoom: 20
         })
     });
 
@@ -36,6 +62,7 @@
         source: new ol.source.Vector({
             features: [
                 {% for point in points %}
+
                     new ol.Feature({
                         geometry: new ol.geom.Point(ol.proj.fromLonLat({{ point }}))
                     }),
@@ -44,6 +71,9 @@
         })
     });
     map.addLayer(layer);
+    {% for point in points %}
+        drawCircleInMeter(map, 50000)
+    {% endfor %}
 </script>
 </body>
 </html>
