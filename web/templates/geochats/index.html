@@ -1,42 +1,77 @@
 {% extends 'base.html' %}
+{% block title %}Nearest{% endblock title %}
 {% block content %}
-    {#    What chat room would you like to enter?<br>#}
-    {#    <input id="room-name-input" type="text" size="100"><br>#}
-    <form method="get" action="{% url 'geochats:room' %}">
-        <input id="room-name-submit" type="submit" value="Start">
-    </form>
-    <script>
-        getLocation()
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'geochats/styles/main.css' %}">
+    <link rel="stylesheet" href="{% static 'geochats/styles/info.css' %}">
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
+    <div class="container-fluid p-0">
 
-        function showPosition(position) {
+        <div class="row m-0" style="height:100vh; position:relative;">
 
-            let lat = position.coords.latitude;
-            let long = position.coords.longitude;
-            {#alert(lat + ' ' + long)#}
-            console.log(lat, long);
-            $.ajax({
-                type: "GET",
-                url: "{% url 'geochats:ajax-location' %}",
-                data: {
-                    'lat': lat,
-                    'lng': long,
-                    'time_offset': Intl.DateTimeFormat().resolvedOptions().timeZone,
-                },
-                success: function (data) {
-                    alert("OK")
-                },
+            <div class="col-lg-5 col-12 d-flex justify-content-start align-items-end pb-5" style="position: relative">
+                <div class="logo">
+                    <img src="{% static "geochats/img/logo.svg" %}" class="img-fluid">
+                    <span>make connection<br/>with people around you</span>
+                </div>
+                <div class="planet" style="padding-top: 100px">
+                    <p>NEAREST</p>
+                    <img src="{% static "geochats/img/planet.svg" %}" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-lg-7 col-12 info d-flex align-items-center justify-content-around"
+                 style="padding-bottom:15%;">
+                <img src="{% static "geochats/img/info-lines.svg" %}" class="info-lines">
+                <div class="info-square info-square-medium mb-2">
+                    <span>at any</span>
+                    <span style="color:#FF7B7B">place</span>
+                </div>
+                <div class="info-square info-square-big">
+                    <span style="color:#FF7B7B">free</span>
+                    <span>of charge</span>
+                </div>
+                <div class="info-square info-square-medium mt-5">
+                    <span>at any</span>
+                    <span style="color:#FF7B7B">time</span>
+                </div>
+                <div class="cta">
+                    <a href="{% url 'geochats:signup' %}">Sign Up</a>
+                    <div style="font-size:25px;">or</div>
+                    <a href="{% url 'geochats:room' %}">Use anonymously</a>
+                </div>
+            </div>
 
-                dataType: 'json'
-            });
-        }
+        </div>
+        <div class="row m-0" style="height:100vh; width:100%">
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                <object type="image/svg+xml" data="{% static "geochats/img/chat-center.svg" %}" style="width:50%"></object>
+            </div>
+        </div>
+        <div class="row m-0" style="height:100vh; width:100%; position:relative;">
+            <div class="col-sm-5 d-flex justify-content-center align-items-center">
+                <img src="{% static "geochats/img/auto-connection.svg" %}" class="img-fluid">
+            </div>
+            <div class="col-sm-6 d-flex justify-content-center align-items-start flex-column">
+                <p class="title">AUTOMATIC CONNECTION</p>
+                <p class="subtitle">A system automatically connects you to the nearest chats available</p>
+            </div>
+        </div>
+        <div class="row m-0"
+             style="height:100vh; width:100%; position:relative; background-color: #80C1C1; color:white;">
 
-    </script>
+            <div class="offset-md-1 col-md-6 col-12 d-flex justify-content-center align-items-center align-items-md-start flex-column">
+                <p class="title">CHOOSE PRIVACY</p>
+                <p class="subtitle">
+                    Only you decide what to share and to which people. Choose from one of three levels of privacy.<br/>
+                    1 - anonymously with username change on every page reload.<br/>
+                    2 - anonymously with choosing username you want and saving it.<br/>
+                    3 - with created account but still with possibility to change username.
+                </p>
+            </div>
+            <div class="col-md-5 col-12 d-flex justify-content-center align-items-center">
+                <img src="{% static "geochats/img/privacy.svg" %}" class="img-fluid">
+            </div>
+        </div>
+    </div>
+
 {% endblock content %}

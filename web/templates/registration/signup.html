@@ -3,6 +3,7 @@
 {% block title %}Sign Up{% endblock title %}
 {% block content %}
     {% load static %}
+    {% load socialaccount %}
     <link rel="stylesheet" href="{% static 'geochats/styles/regsitration.css' %}">
     <div class="logo">
         <div class="logo-text">NEAREST</div>
@@ -12,36 +13,75 @@
     </div>
     <div class="container" style="overflow: hidden; height:100vh; font-family: 'Open Sans', sans-serif;">
         <div class="map-container">
-            <img src="{% static 'geochats/img/signup-map.jpg' %}" class="img-fluid map-chat">
+            <img src="{% static 'geochats/img/signup-map.png' %}" class="img-fluid map-chat">
         </div>
         <div class="row h-100">
             <div class="offset-sm-4 col-sm-4 d-flex justify-content-center align-items-center">
                 <div class="card-form py-5" style="position: relative">
-                    <div style="position: relative">
-                        <input class="field" name="username">
-                        <div class="field-label">Username</div>
+                    <div class="auth-type-btn">
+                        <button class="signup-btn">Sign Up</button>
+                        <button class="login-btn">Log In</button>
                     </div>
-                    <div style="position: relative">
-                        <input class="field" name="password" type="password">
-                        <div class="field-label">Password</div>
-                    </div>
-                    <div style="position: relative">
-                        <input class="field" name="password-repeat" type="password">
-                        <div class="field-label">Password</div>
-                    </div>
-                    <div class="btn-auth-group">
-                        <button class="btn btn-submit">Sign Up</button>
-                        <span style="font-weight: 300; font-size: 15px;" class="py-3">Or</span>
-                        <button class="btn btn-google">Continue with Google <img
-                                src="{% static "geochats/img/google-logo.svg" %}" class="img-fluid"></button>
-                    </div>
+                    <div class="form-container">
+                        <div class="signup-form">
+                            <div style="position: relative">
+                                <input class="field" name="email">
+                                <div class="field-label">E-mail</div>
+                            </div>
+                            <div style="position: relative">
+                                <input class="field" name="username">
+                                <div class="field-label">Username</div>
+                            </div>
+                            <div style="position: relative">
+                                <input class="field" name="password" type="password">
+                                <div class="field-label">Password</div>
+                            </div>
+                            <div style="position: relative">
+                                <input class="field" name="password-repeat" type="password">
+                                <div class="field-label">Password</div>
+                            </div>
+                            <div class="btn-auth-group">
+                                <button class="btn btn-submit">Sign Up</button>
+                                <span style="font-weight: 300; font-size: 15px;" class="py-3">Or</span>
+                                <button class="btn btn-google">Continue with Google <img
+                                        src="{% static "geochats/img/google-logo.svg" %}" class="img-fluid"></button>
+                            </div>
+                        </div>
 
-                    <span class="subtitle-text">EXPERIENCE NEW WAY OF COMMUNICATION</span>
+                        <div class="login-form">
+                            <div style="position: relative">
+                                <input class="field" name="email">
+                                <div class="field-label">E-mail</div>
+                            </div>
+                            <div style="position: relative">
+                                <input class="field" name="password" type="password">
+                                <div class="field-label">Password</div>
+                            </div>
+
+                            <div class="btn-auth-group">
+                                <button class="btn btn-submit">Log In</button>
+                                <span style="font-weight: 300; font-size: 15px;" class="py-3">Or</span>
+                                <a href="{% provider_login_url 'google' %}">
+                                    <button class="btn btn-google">Continue with Google <img
+                                            src="{% static "geochats/img/google-logo.svg" %}" class="img-fluid">
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <span class="subtitle-text">EXPERIENCE<br/>A NEW WAY OF COMMUNICATION</span>
                     <div class="nsymbol">N</div>
                 </div>
             </div>
         </div>
     </div>
-        <script type="text/javascript" src="{% static "geochats/js/registration.js" %}"></script>
+    <a href="{% url "geochats:room" %}" class="btn-skip">
+        <span class="skip-text">Skip</span>
+        <span class="material-icons-outlined material-icons">navigate_next</span>
+    </a>
+
+    <script type="text/javascript" src="{% static "geochats/js/registration.js" %}"></script>
 
 {% endblock content %}

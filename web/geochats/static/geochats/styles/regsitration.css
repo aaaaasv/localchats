@@ -27,6 +27,30 @@
     box-shadow: 10px 10px 19px -9px rgba(0, 0, 0, 0.75);
 }
 
+.signup-form, .login-form, .form-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    transition: 1s;
+}
+
+.login-form {
+    margin-right: -200%;
+    height: 70%;
+}
+
+.form-container {
+    overflow: hidden;
+    position: relative;
+}
+
+.signup-form, .login-form {
+    position: absolute;
+}
+
 .field {
     width: 200px;
     height: 40px;
@@ -34,7 +58,7 @@
     border-radius: 35px;
     padding-left: 15px;
     padding-right: 15px;
-    font-size:13px;
+    font-size: 13px;
 }
 
 .field:focus {
@@ -51,7 +75,7 @@
     padding-left: 15px;
     padding-right: 15px;
     font-size: 13px;
-    border-radius:50px;
+    border-radius: 50px;
 }
 
 .card-form .btn-auth-group .btn-submit {
@@ -67,11 +91,11 @@
 .card-form .btn-auth-group .btn-submit:hover {
     background-color: #f65959;
 }
-.card-form .btn-auth-group .btn-submit:focus {
-    border:2px solid black;
-    box-shadow:none;
-}
 
+.card-form .btn-auth-group .btn-submit:focus {
+    border: 2px solid black;
+    box-shadow: none;
+}
 
 .card-form .btn-auth-group .btn-google {
     width: 230px;
@@ -155,4 +179,61 @@
 
 .logo .logo-img:hover {
     background-color: rgba(0, 0, 0, .9);
+}
+
+.auth-type-btn button {
+    width: 150px;
+    height: 75px;
+    background-color: transparent;
+    border: none;
+    transition: .5s;
+}
+
+.auth-type-btn button:hover {
+    color: black;
+}
+
+.auth-type-btn .login-btn {
+    color: rgba(0, 0, 0, .3);
+}
+
+.auth-type-btn {
+    position: absolute;
+    top: -70px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn-skip {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    font-size: 25px;
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.btn-skip .material-icons {
+    font-size: 40px;
+    margin-bottom: -2.5px;
+}
+
+.btn-skip {
+    text-decoration: none;
+}
+
+.skip-text:hover, .skip-text:focus {
+    text-decoration: underline;
+}
+
+.btn-skip:hover {
+    color: black;
 }

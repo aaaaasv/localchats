@@ -1,0 +1,13 @@
+<svg width="1280" height="622" viewBox="0 0 1280 622" fill="none" xmlns="http://www.w3.org/2000/svg">
+<text fill="black" xml:space="preserve" style="white-space: pre" font-family="Shrimp" font-size="50" letter-spacing="0em"><tspan x="802" y="38.5">connect to chat&#10;</tspan><tspan x="802" y="88.5">with your location</tspan></text>
+<text fill="black" xml:space="preserve" style="white-space: pre" font-family="Shrimp" font-size="50" letter-spacing="0em"><tspan x="11" y="38.5">talk with people&#10;</tspan><tspan x="11" y="88.5">nearby</tspan></text>
+<text fill="black" xml:space="preserve" style="white-space: pre" font-family="Shrimp" font-size="50" letter-spacing="0em"><tspan x="0" y="374.5">move to find&#10;</tspan><tspan x="0" y="424.5">new people</tspan></text>
+<circle opacity="0.5" cx="602" cy="317" r="304.5" fill="#008484" stroke="#FF7B7B"/>
+<circle opacity="0.5" cx="602" cy="317" r="168" fill="#008484"/>
+<circle opacity="0.5" cx="602" cy="317" r="140" fill="#008484"/>
+<circle opacity="0.5" cx="602" cy="317" r="109" fill="#008484"/>
+<circle cx="602" cy="317" r="82" fill="#FF7B7B"/>
+<path d="M689 207.5L783 113.5H1206.5" stroke="#FF7B7B" stroke-width="5"/>
+<path d="M520 208L425.909 114H2" stroke="#FF7B7B" stroke-width="5"/>
+<path d="M502.409 375L425.909 451.5H2" stroke="#FF7B7B" stroke-width="5"/>
+</svg>
