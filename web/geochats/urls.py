@@ -1,10 +1,16 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
+from rest_framework import routers
 
 from . import views
+from .views import MessageViewSet
+
+router = routers.SimpleRouter()
+router.register(r'messages', MessageViewSet, basename='Message')
+urlpatterns = router.urls
 
 app_name = 'geochats'
-urlpatterns = [
+urlpatterns += [
     path('', views.index, name='index'),
     path('logout', LogoutView.as_view()),
     path('auth/signup/', views.signup, name='signup'),

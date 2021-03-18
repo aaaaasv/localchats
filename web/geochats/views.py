@@ -1,11 +1,14 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.gis.geos import Point
+from rest_framework import viewsets
+from rest_framework.response import Response
 
 from geochats.models import Message, Chat, AnonymousUser
 from geochats.services import (
     update_room_id
 )
+from geochats.serializers import MessageSerializer
 
 
 def index(request):
@@ -55,7 +58,22 @@ def ajax_get_location(request):
         }
     return JsonResponse(context)
 
+
+class MessageViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Message.objects.all()
+        serializer = MessageSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = Message.objects.all()
+        message = get_object_or_404(queryset, pk=pk)
+        serializer = MessageSerializer(message)
+        return Response(serializer.data)
+
+
 from .services import key_sector_coords
+
 
 def map_test(request):
     points = []
@@ -69,7 +87,6 @@ def map_test(request):
     }
 
     return render(request, 'geochats/map-test.html', context)
-
 
 
 def signup(request):
