@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'django.contrib.sites',
     'geochats.apps.GeochatsConfig',
+    'accounts.apps.AccountsConfig',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -175,9 +176,11 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = 3
+SITE_ID = 4
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+AUTH_USER_MODEL = "accounts.User"

@@ -4,12 +4,12 @@ from django.contrib.gis.geos import Point
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-from geochats.models import Message, Chat, AnonymousUser
+from geochats.models import Message, Chat
 from geochats.services import (
     update_room_id
 )
 from geochats.serializers import MessageSerializer
-
+from accounts.models import AnonymousUser
 
 def index(request):
     return render(request, 'geochats/index.html', {})

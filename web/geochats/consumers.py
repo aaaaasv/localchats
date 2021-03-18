@@ -11,17 +11,18 @@ from asgiref.sync import sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 
-from .models import Message, Chat, AnonymousUser, Username
+from .models import Message, Chat, Username
 from geochats.services import (
     get_or_create_chat
 )
+from accounts.models import AnonymousUser
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.isUserPersistent = False
         self.user_persistence, self.user = await self.get_or_create_user()
-        print('user_persistene= ', self.user_persistence)
+        print('user_persistence= ', self.user_persistence)
         if self.user_persistence:
             print("GETTING LAST")
             await self.set_last_username()
@@ -183,7 +184,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.scope['session']['user_id'] = user.id
             user_persistence = True
             print("USER HAS BEEN FOUND, user_persistence= ", user_persistence)
-        except (KeyError, TypeError, AnonymousUser.DoesNotExist):
+        except (KeyError, TypeError, AnonymousUser.DoesNotExist) as e:
+            print(e)
             user = AnonymousUser.objects.create()
             self.user = user
             self.scope['session']['user_id'] = user.id

@@ -1,18 +1,11 @@
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import Point
 
+from accounts.models import Username
+
 
 class Chat(models.Model):
     location = models.PointField(geography=True, default=Point(0.0, 0.0))
-
-
-class AnonymousUser(models.Model):
-    id = models.AutoField(primary_key=True)
-
-
-class Username(models.Model):
-    user = models.ForeignKey(AnonymousUser, on_delete=models.CASCADE)
-    username = models.CharField(max_length=100, default="user")
 
 
 class Message(models.Model):
