@@ -2,8 +2,10 @@ from django.contrib.gis.measure import Distance
 from django.contrib.gis.geos import Point
 
 from django.conf import settings
+from channels.db import database_sync_to_async
 
 from geochats.models import Chat
+from accounts.models import AnonymousUser
 
 radius = settings.CHAT_IN_RADIUS
 
@@ -20,6 +22,17 @@ def get_or_create_chat(user_location):
         chat = chats[0]
 
     return chat
+
+
+@database_sync_to_async
+def get_or_create_user(user_id):
+    if user_id is not None:
+        user = AnonymousUser.objects.get(id=user_id)
+        user_persistence = True
+    else:
+        user = AnonymousUser.objects.create()
+        user_persistence = False
+    return user_persistence, user
 
 
 def get_chat(user_location):

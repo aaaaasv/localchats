@@ -31,6 +31,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def ajax_save_user(request):
+    print("SAVING NEW USER")
     user_id = request.POST.get('user_id', None)
 
     if user_id:

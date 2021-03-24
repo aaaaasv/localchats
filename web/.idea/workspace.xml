@@ -20,22 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bf04f23-4310-4003-9814-fb847dfe6d63" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/accounts/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/accounts/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/accounts/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/accounts/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/accounts/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/accounts/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/geochats/migrations/0004_auto_20210304_1209.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/geochats/migrations/0009_auto_20210318_2252.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/geochats/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/consumers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/geochats/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/static/geochats/styles/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/static/geochats/styles/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/localchats/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/localchats/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +136,10 @@
       <workItem from="1615737972108" duration="9071000" />
       <workItem from="1615810789912" duration="18964000" />
       <workItem from="1615885188863" duration="7148000" />
-      <workItem from="1616102398548" duration="5156000" />
+      <workItem from="1616102398548" duration="5330000" />
+      <workItem from="1616148156460" duration="603000" />
+      <workItem from="1616503670765" duration="9097000" />
+      <workItem from="1616607862341" duration="615000" />
     </task>
     <servers />
   </component>
@@ -197,6 +190,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="392" y="20" width="585" height="759" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1616107083000" />
+    <state x="803" y="292" key="refactoring.ChangeSignatureDialog" timestamp="1616535639140">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="803" y="292" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1616535639140" />
     <state x="143" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1616107240050">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
