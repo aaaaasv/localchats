@@ -4,21 +4,19 @@ from django.contrib.gis.geos import Point
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-from geochats.models import Message, Chat
+from geochats.models import AnonMessage, AuthMessage, Chat
 from geochats.services import (
     update_room_id
 )
 from geochats.serializers import MessageSerializer
 from accounts.models import AnonymousUser
 
+
 def index(request):
     return render(request, 'geochats/index.html', {})
 
 
 def room(request):
-    # raise TypeError(request.session['user_id'])
-    # user = AnonymousUser.objects.create()
-    # print(AnonymousUser.objects.get(id=request.session['user_id']).username)
     return render(request, 'geochats/room.html',
                   {
                       'messages': None,
@@ -31,12 +29,10 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def ajax_save_user(request):
-    print("SAVING NEW USER")
     user_id = request.POST.get('user_id', None)
 
     if user_id:
-        request.session['user_id'] = user_id
-        request.session['user_persistence'] = True
+        request.session['anon_user_id'] = user_id
     return JsonResponse({'success': "Ok"})
 
 
@@ -62,12 +58,12 @@ def ajax_get_location(request):
 
 class MessageViewSet(viewsets.ViewSet):
     def list(self, request):
-        queryset = Message.objects.all()
+        queryset = AuthMessage.objects.all()
         serializer = MessageSerializer(queryset, many=True)
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
-        queryset = Message.objects.all()
+        queryset = AuthMessage.objects.all()
         message = get_object_or_404(queryset, pk=pk)
         serializer = MessageSerializer(message)
         return Response(serializer.data)

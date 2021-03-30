@@ -1,4 +1,5 @@
 import json
+from itertools import chain
 
 from django.contrib.gis.geos import Point
 from django.core.serializers.json import DjangoJSONEncoder
@@ -7,7 +8,7 @@ from asgiref.sync import sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 
-from .models import Message, Chat, Username
+from .models import AnonMessage, AuthMessage, Chat, Username, Message
 from geochats.services import (
     get_or_create_chat,
     get_or_create_user
@@ -17,26 +18,25 @@ from accounts.models import AnonymousUser
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.isUserPersistent = False
 
-        user_id = await self.get_from_session('user_id')
-        self.user_persistence, self.user = await get_or_create_user(user_id)
-
-        await self.get_or_set_default_username()
-
+        self.user = await get_or_create_user(self.scope['session'], self.scope['user'])
         self.room_name = None
         self.room_group_name = None
 
         await self.accept()
-        await self.send_start_user_info()
+        await self.send_new_user_info()
 
     @database_sync_to_async
     def get_from_session(self, item):
         session_item = self.scope['session'].get(item)
         return session_item
 
+    @database_sync_to_async
+    def get_username(self):
+        return self.user.get_username()
+
     async def disconnect(self, close_code):
-        await self.remove_not_persistent_user(self.user.id)
+        await self.remove_not_persistent_user()
         try:
             await self.channel_layer.group_discard(
                 self.room_group_name,
@@ -45,15 +45,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
         except AttributeError:
             pass
 
-    @database_sync_to_async
-    def get_or_set_default_username(self):
-        self.username = AnonymousUser.objects.get(id=self.scope['session']['user_id']).username_set.all().last()
-        if self.username is None:
-            self.username = Username.objects.create(username=f'user#{self.user.id}', user=self.user)
-
-    async def send_start_user_info(self):
+    async def send_new_user_info(self):
         user = {
-            'username': self.username.username,
+            'username': await self.get_username(),
             'id': self.user.id
         }
         await self.send(text_data=json.dumps({
@@ -61,10 +55,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         }))
 
     async def set_custom_username(self, username):
-        self.isUserPersistent = True
-        self.username = username
-        await self.update_username()
-        await self.send_start_user_info()
+        await self.update_username(username)
+        await self.send_new_user_info()
 
     # Receive message from WebSocket
     async def receive(self, text_data):
@@ -82,13 +74,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         message = text_data_json.get('message')
         if message:
-            message_db = await self.save_message(message)
+            message_db, message_username, message_user_id = await self.save_message(message)
+            print(message_username)
             # Send message to room group
             message = {
                 'text': message,
-                'username': message_db.username.username,
+                'username': message_username,
                 'date': json.dumps(message_db.date.strftime("%I:%M %p"), cls=DjangoJSONEncoder),
-                'user_id': message_db.username.user_id
+                'user_id': message_user_id
             }
             await self.channel_layer.group_send(
                 self.room_group_name,
@@ -140,23 +133,42 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 }))
 
     @database_sync_to_async
-    def update_username(self):
-        self.user = AnonymousUser.objects.get(id=self.user.id)
-        self.username = Username.objects.create(user=self.user, username=self.username)
+    def update_username(self, new_username):
+        self.user.update_username(new_username)
 
     @database_sync_to_async
     def get_old_messages(self):
-        queryset = Chat.objects.get(id=self.room_name).message_set.all().order_by('date').values('text', 'date',
-                                                                                                 'username__username',
-                                                                                                 'username__user__id')
+        queryset = Chat.objects.get(id=self.room_name).message_set.all().order_by('date').values(
+            'text',
+            'date',
+            'anonmessage__username__username',
+            'authmessage__user__username',
+            'authmessage__user_id',
+            'anonmessage__username__user_id'
+        )
+        # queryset = Chat.objects.get(id=self.room_name).geochats_authmessage_message.all().order_by('date').values()
+        # anon_messages = Chat.objects.get(id=self.room_name)
+
+        # queryset = Message.objects.filter(chat=Chat)
+
         serialized_q = json.dumps(list(queryset), cls=DjangoJSONEncoder)
         return serialized_q
 
     @database_sync_to_async
     def save_message(self, message):
         chat = Chat.objects.get(id=self.room_name)
-        message = Message.objects.create(text=message, chat=chat, username=self.username)
-        return message
+        print(isinstance(self.user, AnonymousUser))
+        if isinstance(self.user, AnonymousUser):
+            message = Message.objects.create(text=message, chat=chat)
+            username = self.user.get_username_instance()
+            if username is None:
+                username = Username.objects.create(user=self.user, username=f'user#{self.user.id}')
+            user_message = AnonMessage.objects.create(message=message, username=username)
+        else:
+            message = Message.objects.create(text=message, chat=chat)
+            user_message = AuthMessage.objects.create(message=message, user=self.user)
+
+        return message, user_message.get_username(), user_message.get_user_id()
 
     @database_sync_to_async
     def get_nearest_chat(self, user_location):
@@ -164,6 +176,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
         return chat.id
 
     @database_sync_to_async
-    def remove_not_persistent_user(self, user_id):
-        if not self.user_persistence:
-            return AnonymousUser.objects.get(id=user_id).delete()
+    def remove_not_persistent_user(self):
+        try:
+            user = AnonymousUser.objects.get(id=self.user.id)
+            if not user.username_set.count() > 1:
+                user.delete()
+                del self.scope['session']['anon_user_id']
+
+        except AnonymousUser.DoesNotExist:
+            pass

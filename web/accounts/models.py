@@ -45,9 +45,40 @@ class User(AbstractUser):
 
     objects = UserManager()
 
+    def get_username(self):
+        return self.username
+
+    def update_username(self, new_username):
+        self.username = new_username
+        self.save()
+        return self.username
+
 
 class AnonymousUser(models.Model):
     id = models.AutoField(primary_key=True)
+
+    def get_username(self):
+        try:
+            return self.username_set.all().last().username
+        except AttributeError:
+            return f'user#{self.id}'
+
+    def get_username_instance(self):
+        try:
+            return self.username_set.all().last()
+        except AttributeError:
+            return None
+
+    def update_username(self, new_username):
+        print("OK")
+        u = self.username_set.create(
+            username=new_username,
+            user=self
+        )
+        print("OK 2")
+        u.save()
+        self.save()
+        return self.get_username()
 
 
 class Username(models.Model):

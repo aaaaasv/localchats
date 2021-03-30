@@ -5,7 +5,7 @@ from django.conf import settings
 from channels.db import database_sync_to_async
 
 from geochats.models import Chat
-from accounts.models import AnonymousUser
+from accounts.models import AnonymousUser, User
 
 radius = settings.CHAT_IN_RADIUS
 
@@ -25,14 +25,20 @@ def get_or_create_chat(user_location):
 
 
 @database_sync_to_async
-def get_or_create_user(user_id):
-    if user_id is not None:
-        user = AnonymousUser.objects.get(id=user_id)
-        user_persistence = True
+def get_or_create_user(session_info, auth_user):
+    anon_user_id = session_info.get('anon_user_id')
+    print(anon_user_id)
+    if auth_user:
+        if isinstance(auth_user, User):
+            return auth_user
+    if anon_user_id:
+        try:
+            user = AnonymousUser.objects.get(id=anon_user_id)
+        except AnonymousUser.DoesNotExist:
+            raise TypeError(anon_user_id)
     else:
         user = AnonymousUser.objects.create()
-        user_persistence = False
-    return user_persistence, user
+    return user
 
 
 def get_chat(user_location):
@@ -42,24 +48,12 @@ def get_chat(user_location):
             Distance(m=radius)
         )
     )
-    # try:
-    #     raise TypeError(
-    #         'user_location: ', user_location.coords,
-    #         'created_chat: ', Chat.objects.all().first().location.coords,
-    #         get_distance(Chat.objects.all().first().location, user_location),
-    #         chats,
-    #     )
-    # except AttributeError:
-    #     create_chat(user_location)
     return chats
 
 
 def create_chat(location):
     t = ChatRetrievingTriangle(key_sector=(50.43216, 30.52504), person_location=(location[1], location[0]))
     Chat.objects.create(location=t.get_new_center())
-
-
-from math import sqrt
 
 
 def get_distance(person_location, new_center):

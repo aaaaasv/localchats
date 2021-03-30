@@ -237,3 +237,23 @@ a {
 .btn-skip:hover {
     color: black;
 }
+
+.auth-or-divider hr {
+    width:100%;
+    position: absolute;
+    top:0;
+    bottom:0;
+    margin: auto;
+    background-color:black;
+    z-index:2;
+    border: 0;
+    border-top: 1px solid black;
+}
+
+.auth-or-divider span {
+    background-color: white;
+    position: relative;
+    z-index:10;
+    padding-right:10px;
+    padding-left:10px;
+}

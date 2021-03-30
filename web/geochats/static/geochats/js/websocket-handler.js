@@ -46,16 +46,27 @@ function connectWebSocket() {
 
     function drawMessage(message) {
         var username;
+        console.log(message)
+        let anon_username = message.anonmessage__username__username;
+        let auth_username = message.authmessage__user__username;
+        let message_user_id = message.user_id;
+        if (message_user_id === undefined) {
+            message_user_id = message.authmessage__user_id;
+        }
+        if (message_user_id === undefined) {
+            message_user_id = message.anonmessage__username__user_id;
+        }
         if (message.username !== undefined) {
             username = message.username;
 
+        } else if (anon_username !== undefined && anon_username !== null) {
+            username = anon_username;
+        } else if (auth_username !== undefined && auth_username !== null) {
+            username = auth_username;
         } else {
-            username = message.username__username
-            if (username === undefined || username === null) {
-                username = "Anon"
-            }
-
+            username = "Anon"
         }
+        console.log("USERNAME:", username)
         let messageRow = document.createElement("div");
         messageRow.classList.add("row");
         messageRow.classList.add("w-100");
@@ -63,8 +74,9 @@ function connectWebSocket() {
 
         let messageBubble = document.createElement("div");
         messageBubble.classList.add("message-bubble");
-        console.log(message.username__user__id, user.id)
-        if (message.username__user__id === user.id || message.user_id === user.id) {
+
+
+        if (message_user_id === user.id) {
             messageBubble.classList.add("message-bubble-self");
             messageColumn.classList.add("offset-sm-8");
             messageColumn.classList.add("col-sm-4");

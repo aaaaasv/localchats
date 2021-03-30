@@ -20,12 +20,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7bf04f23-4310-4003-9814-fb847dfe6d63" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/geochats/migrations/0010_auto_20210327_1550.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/migrations/0011_auto_20210327_1617.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/migrations/0012_auto_20210327_1639.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geochats/migrations/0013_auto_20210327_1640.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/consumers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/geochats/static/geochats/styles/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/static/geochats/styles/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/static/geochats/js/websocket-handler.js" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/static/geochats/js/websocket-handler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geochats/static/geochats/styles/regsitration.css" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/static/geochats/styles/regsitration.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/geochats/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/geochats/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/localchats/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/localchats/asgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/localchats/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/localchats/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/signup.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +151,11 @@
       <workItem from="1616102398548" duration="5330000" />
       <workItem from="1616148156460" duration="603000" />
       <workItem from="1616503670765" duration="9097000" />
-      <workItem from="1616607862341" duration="615000" />
+      <workItem from="1616607862341" duration="7409000" />
+      <workItem from="1616672309608" duration="265000" />
+      <workItem from="1616696620214" duration="3459000" />
+      <workItem from="1616856490817" duration="12249000" />
+      <workItem from="1617103030566" duration="1108000" />
     </task>
     <servers />
   </component>
@@ -186,17 +202,19 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="21" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1614365056100" />
-    <state x="392" y="20" width="585" height="759" key="find.popup" timestamp="1616107083000">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="392" y="1100" width="585" height="759" key="find.popup" timestamp="1616865605226">
+      <screen x="0" y="1080" width="1920" height="1040" />
     </state>
     <state x="392" y="20" width="585" height="759" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1616107083000" />
+    <state x="392" y="1100" width="585" height="759" key="find.popup/0.1080.1920.1040/0.0.1920.1040@0.1080.1920.1040" timestamp="1616865605226" />
     <state x="803" y="292" key="refactoring.ChangeSignatureDialog" timestamp="1616535639140">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="803" y="292" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1616535639140" />
-    <state x="143" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1616107240050">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="143" y="1310" width="672" height="678" key="search.everywhere.popup" timestamp="1616863630654">
+      <screen x="0" y="1080" width="1920" height="1040" />
     </state>
     <state x="143" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1616107240050" />
+    <state x="143" y="1310" width="672" height="678" key="search.everywhere.popup/0.1080.1920.1040/0.0.1920.1040@0.1080.1920.1040" timestamp="1616863630654" />
   </component>
 </project>

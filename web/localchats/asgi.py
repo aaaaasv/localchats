@@ -10,7 +10,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "localchats.settings")
 
 application = ProtocolTypeRouter({
   "http": get_asgi_application(),
-  "websocket": SessionMiddlewareStack(
+  "websocket": AuthMiddlewareStack(
         URLRouter(
             geochats.routing.websocket_urlpatterns
         )

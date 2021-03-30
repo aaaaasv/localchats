@@ -42,7 +42,10 @@
                             </div>
                             <div class="btn-auth-group">
                                 <button class="btn btn-submit">Sign Up</button>
-                                <span style="font-weight: 300; font-size: 15px;" class="py-3">Or</span>
+                                <div style="font-weight: 300; font-size: 15px; position: relative"
+                                     class="py-3 w-100 text-center auth-or-divider">
+                                    <hr>
+                                    <span>Or</span></div>
                                 <button class="btn btn-google">Continue with Google <img
                                         src="{% static "geochats/img/google-logo.svg" %}" class="img-fluid"></button>
                             </div>
@@ -60,7 +63,10 @@
 
                             <div class="btn-auth-group">
                                 <button class="btn btn-submit">Log In</button>
-                                <span style="font-weight: 300; font-size: 15px;" class="py-3">Or</span>
+                                <div style="font-weight: 300; font-size: 15px; position: relative"
+                                     class="py-3 w-100 text-center auth-or-divider">
+                                    <hr>
+                                    <span>Or</span></div>
                                 <a href="{% provider_login_url 'google' %}">
                                     <button class="btn btn-google">Continue with Google <img
                                             src="{% static "geochats/img/google-logo.svg" %}" class="img-fluid">

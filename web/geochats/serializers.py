@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Message
+from .models import AnonMessage, AuthMessage
 
 
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Message
+        model = AuthMessage
         fields = ('text', 'chat', 'date', 'username')
