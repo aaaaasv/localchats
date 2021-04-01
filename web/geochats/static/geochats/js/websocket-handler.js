@@ -82,6 +82,7 @@ function connectWebSocket() {
             messageColumn.classList.add("col-sm-4");
         } else {
             messageColumn.classList.add("col-sm-12");
+            playSound(notificationSoundReceived)
         }
 
         let spanMessage = document.createElement("div");

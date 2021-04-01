@@ -49,11 +49,18 @@ $('.scroll-bottom').on('click', function () {
 })
 scrollMessagesBottom()
 
+function playSound(url) {
+  const audio = new Audio(url);
+  audio.play();
+}
+const notificationSoundSent = 'http://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3';
+const notificationSoundReceived = 'http://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a';
 
 document.querySelector('#chat-message-input').focus();
 document.querySelector('#chat-message-input').onkeyup = function (e) {
     if (e.keyCode === 13) {  // enter, return
         document.querySelector('#chat-message-submit').click();
+        playSound(notificationSoundSent)
     }
 };
 
