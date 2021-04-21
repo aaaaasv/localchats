@@ -36,10 +36,9 @@ keyboard_arrow_down
     <div class="container-fluid">
         <div class="row pt-5 messages">
             <div class="offset-sm-3 col-sm-6 message-container" id="chat-log">
-
                 {% for message in messages %}
                     <div class="row w-100">
-                        <div class="col-sm-12">
+                        <div class="col-12">
                             <div class="message-bubble">
                                 <div class="message-meta">
                                     <div class="username">
@@ -54,10 +53,8 @@ keyboard_arrow_down
                     </div>
                 {% endfor %}
             </div>
-
-
         </div>
-        <div class="row message-input">
+        <div class="row message-input w-sm-100 w-md-75">
             <div class="col-sm-12">
                 <span class="connection-status" id="connection-status"></span>
                 <input id="chat-message-input" type="text" placeholder="Write a message...">
